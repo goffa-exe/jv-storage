@@ -6,12 +6,11 @@ public class StorageImpl<K, V> implements Storage<K, V> {
     private static final int STORAGE_CAPACITY = 10;
     private final Object[] keys;
     private final Object[] values;
-    private int size;
+    private int size = 0;
     
     public StorageImpl() {
         this.keys = new Object[STORAGE_CAPACITY];
         this.values = new Object[STORAGE_CAPACITY];
-        this.size = 0;
     }
     
     @Override
@@ -38,12 +37,13 @@ public class StorageImpl<K, V> implements Storage<K, V> {
         return null;
     }
     
-    private boolean isEqual(K key1, K key2) {
-        return key1 == key2 || (key1 != null && key1.equals(key2));
-    }
-    
     @Override
     public int size() {
         return size;
+    }
+    
+    private boolean isEqual(K firstKey, K secondKey) {
+        return firstKey == secondKey
+                || (firstKey != null && firstKey.equals(secondKey));
     }
 }
